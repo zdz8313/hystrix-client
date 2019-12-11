@@ -2,8 +2,7 @@ package com.oracle.hrb;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
-import com.sun.deploy.nativesandbox.comm.Response;
-import org.apache.http.HttpRequest;
+import com.netflix.hystrix.HystrixCommandProperties;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -16,10 +15,12 @@ public class DemoCommand  extends HystrixCommand {
   //定义url
    private String url;
   private CloseableHttpClient httpClient;
-
+    //构造器
     protected DemoCommand(String url) {
         //将来线程池可以直接使用
-        super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+       // super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+        //设置的超时时间单位毫秒
+        super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("ExampleGroup")).andCommandPropertiesDefaults(HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(11000)));//设置超时的时间
         this.url=url;
         this.httpClient= HttpClients.createDefault();
     }

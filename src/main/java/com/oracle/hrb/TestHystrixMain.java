@@ -8,6 +8,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.lang.instrument.ClassDefinition;
 
 public class TestHystrixMain {
     public static void main(String[] args) throws IOException {
@@ -18,4 +19,7 @@ public class TestHystrixMain {
         System.out.println(EntityUtils.toString(response.getEntity()));
 
     }
+
+
+
 }
