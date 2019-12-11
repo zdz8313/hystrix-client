@@ -25,18 +25,15 @@ public class DemoCommand  extends HystrixCommand {
     }
 
     @Override
-    protected Object run()  {
-
+    protected Object run() throws IOException {
         HttpGet get = new HttpGet(url);
+         HttpResponse response =httpClient.execute(get);
+        return EntityUtils.toString(response.getEntity());
+    }
 
-        try {
-            HttpResponse   response = httpClient.execute(get);
-            return EntityUtils.toString(response.getEntity());
-        } catch (IOException e) {
-          return "访问超时";
-        }
-
-
-
+    @Override
+    protected Object getFallback() {
+        System.out.println("回退");
+        return  "系统异常";
     }
 }
