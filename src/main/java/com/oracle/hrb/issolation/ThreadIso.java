@@ -3,7 +3,7 @@ package com.oracle.hrb.issolation;
 import com.netflix.config.ConfigurationManager;
 
 /**测试回退
- * 根据线程池的
+ * 默认的是根据线程池的
  */
 public class ThreadIso {
     public static void main(String[] args) throws InterruptedException {
